@@ -75,7 +75,7 @@ void main() async {
     await api.login(username, password);
 
     // 설정 파일 경로를 확인하여 로드
-    const configPath = '/volume1/Navigation/config.json'; // 적절한 경로로 수정 필요
+    const configPath = '/Navigation/config.json'; // 적절한 경로로 수정 필요
     if (await api.fileExists(configPath)) {
       final jsonString = await api.getFile(configPath);
       final config = json.decode(jsonString);
@@ -102,5 +102,11 @@ void main() async {
     },
   );
 
-  runApp(const MainPage());
+  runApp(MaterialApp(
+    title: 'Navigation',
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+    ),
+    home: const MainPage(),
+  ));
 }
