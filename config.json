@@ -1,0 +1,20 @@
+{
+    "naverMap": {
+      "clientId": "7pvo13mp0n"
+    },
+    "appSettings": {
+      "appName": "셔틀버스 앱",
+      "version": "1.0.0",
+      "updateRequired": false
+    },
+    "server": {
+      "apiBaseUrl": "https://api.example.com",
+      "timeout": 30000
+    },
+    "mapSettings": {
+      "defaultZoom": 15,
+      "defaultLatitude": 37.5666102,
+      "defaultLongitude": 126.9783881,
+      "mapStyle": "normal"
+    }
+  }
