@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_shuttle_bus/controllers/map_view_model.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:flutter_application_shuttle_bus/pages/main_page.dart';
+import 'package:flutter_application_shuttle_bus/pages/single_page_app.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_shuttle_bus/services/synology_api.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:get/get.dart';
+import 'package:flutter_application_shuttle_bus/services/route_service.dart';
 
 // 인증 정보를 로컬 파일에서 읽어오는 함수
 Future<Map<String, dynamic>> loadAuthConfig() async {
@@ -93,6 +96,12 @@ void main() async {
     print('기본 네이버 클라이언트 ID 사용: $naverClientId');
   }
 
+  // GetX의 MapViewModel 등록
+  Get.put(MapViewModel(), permanent: true);
+
+  // 경로 서비스 초기화
+  await Get.put(RouteService(), permanent: true).init();
+
   // 네이버 맵 초기화
   await FlutterNaverMap().init(
     clientId: naverClientId,
@@ -102,11 +111,9 @@ void main() async {
     },
   );
 
-  runApp(MaterialApp(
-    title: 'Navigation',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    home: const MainPage(),
+  // GetX 스타일로 앱 실행
+  runApp(const GetMaterialApp(
+    title: '셔틀버스 앱',
+    home: SinglePageApp(),
   ));
 }
